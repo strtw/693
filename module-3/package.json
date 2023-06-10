@@ -7,7 +7,9 @@
     "start": "nodemon app.js",
     "compile": "webpack",
     "watch": "webpack --watch",
-    "build": "webpack --mode production --entry ./public/employees.js --output-path ./public"
+    "build": "webpack --mode production --entry ./public/employees.js --output-path ./public",
+    "compile-babel": "babel src/employees.jsx --presets @babel/react src/employees.jsx --out-dir public",
+    "watch-babel": "babel src --presets @babel/react src --out-dir public --watch --verbose"
   },
   "type": "module",
   "keywords": [],
