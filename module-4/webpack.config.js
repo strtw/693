@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const isProduction = 'production';
 
 const config = {
   entry: {
@@ -17,15 +16,24 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
+        exclude: /node_modules\/(?!(fs))/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: 'defaults',
+              },
+            ],
+            '@babel/preset-react',
+          ],
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   optimization: {
     splitChunks: {
@@ -34,7 +42,6 @@ const config = {
     },
   },
   devtool: 'source-map',
-  mode: isProduction ? 'production' : 'development',
 };
 
 export default config;
